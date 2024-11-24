@@ -1,4 +1,4 @@
-package com.github.itzephir.result
+package io.github.itzephir.result
 
 /**
  * Executes the given [action] if this [Result] is a success.

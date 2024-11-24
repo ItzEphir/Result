@@ -1,4 +1,4 @@
-package com.github.itzephir.result
+package io.github.itzephir.result
 
 sealed interface TestErrors : Error {
 

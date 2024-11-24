@@ -1,4 +1,4 @@
-package com.github.itzephir.result
+package io.github.itzephir.result
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

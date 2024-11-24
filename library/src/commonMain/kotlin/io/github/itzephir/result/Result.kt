@@ -1,4 +1,4 @@
-package com.github.itzephir.result
+package io.github.itzephir.result
 
 /**
  * A sealed interface representing the result of an operation, which can be either a success or a failure.

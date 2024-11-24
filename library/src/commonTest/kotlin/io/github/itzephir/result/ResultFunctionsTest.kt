@@ -1,41 +1,42 @@
-package com.github.itzephir.result
+package io.github.itzephir.result
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails
+import kotlin.test.assertTrue
 
 class ResultFunctionsTest {
     @Test
     fun `test onSuccess`() {
         failureString.onSuccess {
-            return assert(false) { it }
+            return assertTrue(false, it)
         }
         successString.onSuccess {
-            return assert(true) { it }
+            return assertTrue(true, it)
         }
-        assert(false)
+        assertTrue(false)
     }
 
     @Test
     fun `test onFailure`() {
         successString.onFailure {
-            return assert(false) { it }
+            return assertTrue(false, it.toString())
         }
         failureString.onFailure {
-            return assert(true) { it }
+            return assertTrue(true, it.toString())
         }
-        assert(false)
+        assertTrue(false)
     }
 
     @Test
     fun `test onFailure with TestError`() {
         anotherFailureString.onFailure<TestErrors.TestError, TestErrors> {
-            return assert(false) { it }
+            return assertTrue(false, it.toString())
         }
         failureString.onFailure<TestErrors.TestError, TestErrors> {
-            return assert(true) { it }
+            return assertTrue(true, it.toString())
         }
-        return assert(false)
+        return assertTrue(false)
     }
 
     @Test
@@ -133,17 +134,17 @@ class ResultFunctionsTest {
     @Test
     fun `test successful getOrElse`() {
         successString.getOrElse {
-            return assert(false)
+            return assertTrue(false, it.toString())
         }
-        assert(true)
+        assertTrue(true)
     }
 
     @Test
     fun `test failed getOrElse`() {
         failureString.getOrElse {
-            return assert(true)
+            return assertTrue(true, it.toString())
         }
-        assert(false)
+        assertTrue(false)
     }
 
     @Test

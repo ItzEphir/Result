@@ -1,4 +1,4 @@
-package com.github.itzephir.result
+package io.github.itzephir.result
 
 /**
  * Represents an error with an associated {@link Throwable}.
