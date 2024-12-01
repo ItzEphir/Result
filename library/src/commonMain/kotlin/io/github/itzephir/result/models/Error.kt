@@ -12,11 +12,10 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package io.github.itzephir.result
+package io.github.itzephir.result.models
 
 /**
- * Represents an error with an associated {@link Throwable}.
+ * Represents an error.
  */
-public interface ErrorWithThrowable : Error {
-    public val throwable: Throwable
-}
+public interface Error
+

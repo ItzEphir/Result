@@ -14,6 +14,17 @@
 
 package io.github.itzephir.result
 
+import io.github.itzephir.result.extensions.flat
+import io.github.itzephir.result.extensions.flatMap
+import io.github.itzephir.result.extensions.get
+import io.github.itzephir.result.extensions.getOrElse
+import io.github.itzephir.result.extensions.getOrNull
+import io.github.itzephir.result.extensions.map
+import io.github.itzephir.result.extensions.onFailure
+import io.github.itzephir.result.extensions.onSuccess
+import io.github.itzephir.result.extensions.toKotlinResult
+import io.github.itzephir.result.extensions.toResult
+import io.github.itzephir.result.models.Result
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFails

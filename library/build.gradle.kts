@@ -71,6 +71,7 @@ mavenPublishing {
         }
         scm {
             connection = "scm:git:git://github.com/ItzEphir/Result.git"
+            developerConnection = "scm:git:ssh://github.com/ItzEphir"
             url = "https://github.com/ItzEphir/Result"
         }
     }

@@ -14,6 +14,9 @@
 
 package io.github.itzephir.result
 
+import io.github.itzephir.result.models.Error
+import io.github.itzephir.result.models.ErrorWithThrowable
+
 sealed interface TestErrors : Error {
 
     data class TestError(override val throwable: Throwable) : ErrorWithThrowable, TestErrors

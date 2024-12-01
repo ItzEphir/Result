@@ -1,9 +1,5 @@
 # Result Functions
 
-This `ResultFunctions.kt` file provides a set of extension functions designed to operate on a `Result` type. These
-extensions offer various utility methods which facilitate the handling and transformation of result objects, improving
-the ergonomics of working with success and error outcomes in a functional style.
-
 ## Overview of Provided Extensions
 
 ### `onSuccess`

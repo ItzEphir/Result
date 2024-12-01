@@ -12,7 +12,7 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package io.github.itzephir.result
+package io.github.itzephir.result.models
 
 /**
  * A sealed interface representing the result of an operation, which can be either a success or a failure.
@@ -37,4 +37,6 @@ public sealed interface Result<out D, out E: Error> {
      * @property error the error returned by the failed operation.
      */
     public data class Failure<out E : Error>(val error: E) : Result<Nothing, E>
+
+    public companion object
 }

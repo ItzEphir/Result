@@ -14,6 +14,7 @@
 
 package io.github.itzephir.result
 
+import io.github.itzephir.result.models.Result
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
