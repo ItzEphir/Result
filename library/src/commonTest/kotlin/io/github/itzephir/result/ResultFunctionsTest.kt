@@ -14,16 +14,7 @@
 
 package io.github.itzephir.result
 
-import io.github.itzephir.result.extensions.flat
-import io.github.itzephir.result.extensions.flatMap
-import io.github.itzephir.result.extensions.get
-import io.github.itzephir.result.extensions.getOrElse
-import io.github.itzephir.result.extensions.getOrNull
-import io.github.itzephir.result.extensions.map
-import io.github.itzephir.result.extensions.onFailure
-import io.github.itzephir.result.extensions.onSuccess
-import io.github.itzephir.result.extensions.toKotlinResult
-import io.github.itzephir.result.extensions.toResult
+import io.github.itzephir.result.extensions.*
 import io.github.itzephir.result.models.Result
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -39,7 +30,6 @@ class ResultFunctionsTest {
         successString.onSuccess {
             return assertTrue(true, it)
         }
-        assertTrue(false)
     }
 
     @Test
@@ -50,24 +40,22 @@ class ResultFunctionsTest {
         failureString.onFailure {
             return assertTrue(true, it.toString())
         }
-        assertTrue(false)
     }
 
     @Test
     fun `test onFailure with TestError`() {
-        anotherFailureString.onFailure<TestErrors.TestError, TestErrors> {
-            return assertTrue(false, it.toString())
-        }
-        failureString.onFailure<TestErrors.TestError, TestErrors> {
+        anotherFailureString.onFailure {
             return assertTrue(true, it.toString())
         }
-        return assertTrue(false)
+        failureString.onFailure {
+            return assertTrue(true, it.toString())
+        }
     }
 
     @Test
     fun `test successful map`() {
         val expected = Result.Success(42)
-        val actual = Result<String, TestErrors>.Success<String>("42").map { it.toInt() }
+        val actual = Result.Success<String>("42").map { it.toInt() }
         assertEquals(expected, actual)
     }
 
@@ -96,7 +84,7 @@ class ResultFunctionsTest {
     fun `test outer failed flat`() {
         val expected: Result<String, TestErrors> = failureString
         val actual: Result<String, TestErrors> =
-            Result<Result<String, TestErrors>, TestErrors>.Failure<TestErrors>(TestErrors.TestError(exception)).flat()
+            Result.Failure<TestErrors>(TestErrors.TestError(exception)).flat()
         assertEquals(expected, actual)
     }
 
@@ -145,7 +133,7 @@ class ResultFunctionsTest {
     @Test
     fun `test null in successful getOrNull`() {
         val expected = null
-        val actual = Result<String?, TestErrors>.Success(null).getOrNull()
+        val actual = Result.Success<Unit?>(null).getOrNull()
         assertEquals(expected, actual)
     }
 
@@ -208,21 +196,21 @@ class ResultFunctionsTest {
     }
 
     @Test
-    fun `test failed toKotlinResult`(){
+    fun `test failed toKotlinResult`() {
         val expected = kotlin.Result.failure<String>(exception)
         val actual = failureString.toKotlinResult { exception }
         assertEquals(expected, actual)
     }
 
     @Test
-    fun `test successful toKotlinResult for ErrorWithThrowable`(){
+    fun `test successful toKotlinResult for ErrorWithThrowable`() {
         val expected = kotlin.Result.success("success")
         val actual = successStringWithThrowable.toKotlinResult()
         assertEquals(expected, actual)
     }
 
     @Test
-    fun `test failed toKotlinResult for ErrorWithThrowable`(){
+    fun `test failed toKotlinResult for ErrorWithThrowable`() {
         val expected = kotlin.Result.failure<String>(exception)
         val actual = failureStringWithThrowable.toKotlinResult()
         assertEquals(expected, actual)
@@ -231,15 +219,15 @@ class ResultFunctionsTest {
     companion object {
         private val exception = Exception()
         private val successString: Result<String, TestErrors> =
-            Result<String, TestErrors>.Success<String>("success")
+            Result.Success("success")
         private val failureString: Result<String, TestErrors> =
-            Result<String, TestErrors>.Failure<TestErrors>(TestErrors.TestError(exception))
+            Result.Failure<TestErrors>(TestErrors.TestError(exception))
         private val anotherFailureString: Result<String, TestErrors> =
-            Result<String, TestErrors>.Failure<TestErrors>(TestErrors.AnotherTestError)
+            Result.Failure<TestErrors>(TestErrors.AnotherTestError)
 
         private val successStringWithThrowable: Result<String, TestErrors.TestError> =
-            Result<String, TestErrors.TestError>.Success<String>("success")
+            Result.Success("success")
         private val failureStringWithThrowable: Result<String, TestErrors.TestError> =
-            Result<String, TestErrors.TestError>.Failure<TestErrors.TestError>(TestErrors.TestError(exception))
+            Result.Failure(TestErrors.TestError(exception))
     }
 }

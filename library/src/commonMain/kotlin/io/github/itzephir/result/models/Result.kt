@@ -20,7 +20,7 @@ package io.github.itzephir.result.models
  * @param <D> the type of the data in case of success.
  * @param <E> the type of the error in case of failure, must extend [Error].
  */
-public sealed interface Result<out D, out E: Error> {
+public sealed interface Result<out D, out E : Error> {
 
     /**
      * Represents a successful result of an operation.

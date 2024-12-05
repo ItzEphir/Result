@@ -34,12 +34,11 @@ class ResultTest {
         assertEquals(expected, actual)
     }
 
-
     companion object {
         private val exception = Exception()
         private val successString: Result<String, TestErrors> =
-            Result<String, TestErrors>.Success<String>("success")
+            Result.Success("success")
         private val failureString: Result<String, TestErrors> =
-            Result<String, TestErrors>.Failure<TestErrors>(TestErrors.TestError(exception))
+            Result.Failure<TestErrors>(TestErrors.TestError(exception))
     }
 }

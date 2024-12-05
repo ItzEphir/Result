@@ -66,3 +66,4 @@ fun fetchData(): Result<String, MyError> {
 
 In this example, `fetchData` is a function that returns a `Result` object which could be either a `Result.Success`
 containing a string value or a `Result.Failure` containing a custom error of type `MyError`.
+

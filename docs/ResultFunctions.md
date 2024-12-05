@@ -5,7 +5,7 @@
 ### `onSuccess`
 
 ```kotlin
-inline fun <D, E : Error> Result<D, E>.onSuccess(action: (D) -> Unit): Result<D, E>
+inline fun <D, E : Error> Result<D, E>.onSuccess(action: (E) -> Unit): Result<D, E>
 ```
 
 Executes the given action if the `Result` is a success. This allows for performing side effects on the success value
@@ -14,11 +14,11 @@ without altering the result.
 ### `onFailure`
 
 ```kotlin
-inline fun <reified E : RootE, RootE : Error> Result<*, RootE>.onFailure(action: (E) -> Unit): Result<*, RootE>
+inline fun <D, E : Error> Result<D, E>.onFailure(action: (E) -> Unit): Result<D, E>
 ```
 
-Executes the given action if the `Result` is a failure containing an error of type `E`, where `E` is a subtype of
-`RootE`. This allows for performing side effects on the error value without altering the result.
+Executes the given action if the `Result` is a failure. This allows for performing
+side effects on the error value without altering the result.
 
 ### `map`
 
@@ -103,14 +103,14 @@ Converts a custom `Result` with a throwable error to a Kotlin `kotlin.Result`.
 
 ```kotlin
 val result: Result<Int, MyError> = Result.Success(42)
-result.onSuccess { println(it) }  // prints: 42
+result.onSuccess { println(it) }  // prints 42
 ```
 
 ### `onFailure` Example
 
 ```kotlin
-val result: Result<Int, MyError> = Result.Failure(MyError())
-result.onFailure<MyError> { println(it) } // prints MyError.toString()
+val result: Result<MyError> = Result.Failure(MyError())
+result.onFailure { println(it) } // prints MyError
 ```
 
 ### `map` Example

@@ -44,3 +44,7 @@ fun <D> Result.Companion.Failure(message: String): Result<D, StringError>
 ### Usage
 
 This extension function simplifies creating a failure result with a string error message, ensuring consistency and reducing boilerplate code.
+
+```kotlin
+val result = Result.Failure<String>("Some fail")
+```
