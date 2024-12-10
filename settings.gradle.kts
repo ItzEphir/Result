@@ -11,9 +11,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenLocal()
     }
 }
 
-rootProject.name = "Result"
-include(":library")
+rootProject.name = "result"
+include(":result")
 

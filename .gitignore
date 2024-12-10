@@ -1,4 +1,5 @@
 .gradle
+.env
 local.properties
 .idea
 build/

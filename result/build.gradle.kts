@@ -8,7 +8,7 @@ plugins {
     alias(libs.plugins.vanniktech.mavenPublish)
 }
 
-group = "io.github.ItzEphir"
+group = "io.github.itzephir"
 version = "1.0.0"
 
 kotlin {
@@ -19,11 +19,10 @@ kotlin {
         withSourcesJar(publish = true)
     }
     androidTarget {
-        publishLibraryVariants("debug")
-        publishLibraryVariants("release")
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_1_8)
         }
+        publishLibraryVariants("release")
     }
     iosX64()
     iosArm64()
@@ -68,20 +67,24 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
+    compileOptions{
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-
     signAllPublications()
 
     coordinates(group.toString(), "result", version.toString())
 
     pom {
         name = "Result"
-        description = "Custom Result class with useful functionality"
+        description = "A library for results."
         inceptionYear = "2024"
         url = "https://github.com/ItzEphir/Result"
+
         licenses {
             license {
                 name = "The Apache License, Version 2.0"
